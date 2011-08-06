@@ -1,0 +1,271 @@
+@import url(http://fonts.googleapis.com/css?family=Leckerli+One|Marvel);
+
+// Variables
+
+$page_width       : 100%;
+
+$background_color : #111;
+$text_color       : #eee;
+$link_color       : #f64;
+
+$fonts            : "Calibri", helvetica, arial, sans;
+$fontsize         : 20px;
+
+
+// CSS3 Mixins
+
+@mixin inline_block {
+    display: inline-block;
+    // IE 6/7
+    *zoom: 1;
+    *display: inline;
+}
+
+@mixin border_radius($t:5px, $r:$t, $b:$t, $l:$t) {
+    -moz-border-radius: $t $r $b $l;
+    -webkit-border-radius: $t $r $b $l;
+    border-radius: $t $r $b $l;
+}
+
+@mixin box_shadow($h:2px, $v:2px, $blur:2px, $color:#999) {
+    -moz-box-shadow: $h $v $blur $color;
+    -webkit-box-shadow: $h $v $blur $color;
+    box-shadow: $h $v $blur $color;
+}
+
+@mixin inset_box_shadow($h:2px, $v:2px, $blur:2px, $color:#999) {
+    -moz-box-shadow: inset $h $v $blur $color;
+    -webkit-box-shadow: inset $h $v $blur $color;
+    box-shadow: inset $h $v $blur $color;
+}
+
+@mixin linear_gradient($color1, $color2) {
+    background-color: $color1; 
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$color1}', endColorstr='#{$color2}'); // IE
+    background-image: -webkit-gradient(linear, left top, left bottom, from($color1), to($color2));
+    background-image: -moz-linear-gradient($color1, $color2);
+}
+
+@mixin multicolumn($count, $gap:20px) {
+    -moz-column-count: $count;
+    -moz-column-gap: $gap;
+    -webkit-column-count: $count;
+    -webkit-column-gap: $gap;
+    column-count: $count;
+    column-gap: $gap;
+}
+
+@mixin animation-transition($time, $transition:ease-in-out, $what:all) {
+    -webkit-transition: $what $time $transition;
+    -moz-transition: $what $time $transition;
+    -o-transition: $what $time $transition;
+}
+
+@mixin animation-transform($transform) {
+    -webkit-transform: $transform;
+    -moz-transform: $transform;
+    -o-transform: $transform;
+}
+
+
+// Main Styles
+
+body {
+    width: $page_width;
+    margin: auto;
+
+    font-family: $fonts;
+    font-size: $fontsize;
+
+    background: $background_color;
+    color: $text_color;
+}
+
+//a link
+a {
+    color: $link_color;
+    text-decoration: none;
+    border-bottom: 1px dotted darken(desaturate($link_color, 50%), 30%);
+
+    @include animation-transition(0.2s);
+
+    &:hover {
+        color: lighten($link_color, 30%);
+        @include animation-transition(0.2s);
+    }
+}
+
+h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+    font-family: "Marvel", $fonts;
+}
+
+#header {
+    background: #ddd url('cubes.png');
+    color: #222;
+    padding: 10px;
+    text-align: center;
+
+    border-bottom: 4px solid #444;
+
+    h1, h2 {
+        display: inline-block;
+        margin: 0 10px 0 10px;
+    }
+
+    h1 {
+        font-family: "Leckerli One", $fonts;
+        font-size: 48px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+}
+
+#date-range {
+    padding: 10px;
+    background: #02C776;
+    color: #fff;
+    font-weight: bold;
+    text-transform: lowercase;
+    text-align: center;
+
+    ::-webkit-input-placeholder { color: #aaa !important; }
+    :-moz-placeholder { color: #aaa !important; }
+
+    line-height: 28px;
+
+    input[type=text] {
+        background: #fff;
+        color: #444;
+        border: 2px solid #888;
+        padding: 8px;
+        font-size: 13px;
+
+        @include inset-box-shadow(1px, 1px, 3px, rgba(0, 0, 0, 0.3));
+
+        &:focus {
+            outline: 2px solid #ff0;
+        }
+    }
+
+    input[type=submit] {
+        color: #02C776;
+        border: none;
+        padding: 6px;
+        font-size: 13px;
+        font-weight: bold;
+        text-shadow: -1px -1px 1px #333, 1px 1px 1px #666;
+        text-transform: uppercase;
+        cursor: pointer;
+        @include linear-gradient(#666, #333);
+        @include border-radius(20px);
+        @include box-shadow(1px, 1px, 3px, rgba(0, 0, 0, 0.3));
+    }
+
+    label, input[type=checkbox] {
+        cursor: pointer;
+    }
+
+    div {
+        margin-left: 10px;
+        display: inline-block;
+        font-size: 13px;
+    }
+}
+
+#results {
+    padding: 8px;
+
+    h3 {
+        color: #eee;
+        font-weight: normal;
+        border-bottom: 2px solid #544470;
+        margin-bottom: 6px;
+        padding: 2px;
+
+        b { color: #fff; }
+
+        span {
+            color: #666;
+            text-transform: lowercase;
+        }
+
+        i {
+            color: #887;
+        }
+    }
+
+    .visitor {
+        display: inline-block;
+        width: 292px;
+        margin: 6px;
+        margin-bottom: 20px;
+        position: relative;
+
+        i {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+
+            td {
+                padding: 3px;
+                border-bottom: 1px solid #222;
+                font-size: 14px;
+                line-height: 20px;
+            }
+
+            td:nth-child(1) {
+                width: 80px;
+                text-align: right;
+                color: #333;
+                font-size: 12px;
+                text-transform: lowercase;
+                padding-right: 8px;
+            }
+
+            td:nth-child(2) {
+                text-align: left;
+                border-left: 1px solid #222;
+                padding-left: 8px;
+            }
+
+            tr:nth-child(3) td {
+                border-bottom: 1px solid #333;
+            }
+
+            tr:nth-child(6) td {
+                border-bottom: none;
+            }
+        }
+    }
+}
+
+.part-time-arrived { color: #bdb;}
+.part-time-leave   { color: #dbb; }
+.part-ip           { color: #F2B638; background: #222; }
+.part-browser      { color: #A6CDF2; }
+.part-views        { color: #E376FD; }
+.part-time-spent   { color: #C2FF51; }
+.part-referrer     { color: #FBA465; }
+.bad {
+    color: desaturate(#B40318, 30%);
+    border-bottom: 1px solid desaturate(#B40318, 30%);
+}
+
+.part-time-spent {
+    color: #555;
+    background: inherit;
+    font-size: 13px;
+    display: block;
+    position: absolute;
+    padding: 3px;
+    top: 39px;
+    right: 12px;
+}
