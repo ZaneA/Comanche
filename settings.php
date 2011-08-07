@@ -15,6 +15,10 @@ define('LOG_PATHS', '/home/zanea/access.log');
 define('FILTER_FROM', '1 day ago');
 define('FILTER_UNTIL', 'now');
 
+// List of hosts we're interested in seeing, separated by ':'
+// Leave blank to display all
+define('FILTER_HOSTS', 'www.host1.com:www.host2.com');
+
 // Time format used wherever a time is printed
 define('TIME_FORMAT', '%A, <b>%I:%M</b> %P');
 

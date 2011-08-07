@@ -50,6 +50,13 @@ $parser->addFilter(function ($data) {
   $data->url = htmlentities($data->host . $data->request);
 });
 
+// Filter out hosts we aren't interested in
+$parser->addFilter(function ($data) {
+  if (FILTER_HOSTS && !in_array($data->host, explode(':', FILTER_HOSTS))) {
+    return false;
+  }
+});
+
 // Turn the referrer into a link
 $parser->addFilter(function ($data) {
   if ($data->referer != '-') {
